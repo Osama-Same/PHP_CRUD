@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <!-- Edit Student Modal -->
+    <!-- Edit user Modal -->
     <div class="modal fade" id="studentEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -103,18 +103,19 @@
                         <div class="mb-3">
                             <label for="">image</label>
                             <input type="file" name="image" id="u_image" class="form-control" />
+                            <span id="user_uploaded_image"></span>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Student</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- View Student Modal -->
+    <!-- View user Modal -->
     <div class="modal fade" id="studentViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -143,11 +144,7 @@
                         <label for="">Authorization</label>
                         <p id="view_authorization" class="form-control"></p>
                     </div>
-                    <div class="mb-3">
-                        <label for="">image</label>
-                        <p id="view_image" class="form-control"></p>
-                        <img src="./upload/users/view_image" id="view_image"/>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -155,6 +152,9 @@
             </div>
         </div>
     </div>
+  
+  
+  <!-- Table Users -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
@@ -163,7 +163,7 @@
                         <h4>PHP Ajax CRUD without page reload using Bootstrap Modal
 
                             <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#studentAddModal">
-                                Add Student
+                                Add user
                             </button>
                         </h4>
                     </div>
@@ -367,7 +367,7 @@
                         $('#view_phone').text(res.data.phone);
                         $('#view_password').text(res.data.password);
                         $('#view_authorization').text(res.data.authorization);
-                        $('#view_image').find(res.data.image);
+                        $('#view_image').html(res.data.image);
                         $('#studentViewModal').modal('show');
                     }
                 }

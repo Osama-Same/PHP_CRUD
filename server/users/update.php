@@ -1,6 +1,6 @@
 <?php
 include '../connect.php';
-
+include "./function.php";
 if (isset($_POST['update_user'])) {
 
     $id = $_POST['id'];
@@ -9,9 +9,10 @@ if (isset($_POST['update_user'])) {
     $password = $_POST['password'];
     $phone = $_POST['phone'];
     $authorization = $_POST['authorization'];
-    $image = $_FILES['image']['name'];
-    $tmp_name = $_FILES['image']['tmp_name'];
-    move_uploaded_file($tmp_name, "../../upload/./users/" . $image);
+    $image = '';
+    if ($_FILES["image"]["name"] != '') {
+        $image = upload_image();
+    } 
 
     if ($name == NULL || $email == NULL || $phone == NULL || $password == NULL || $authorization == null) {
         $res = [
@@ -26,20 +27,19 @@ if (isset($_POST['update_user'])) {
             WHERE id='$id'";
     $query_run = mysqli_query($conn, $query);
 
-   if ($query_run) {
-     $res = [
-        'status' => 200,
-        'message' => 'user Updated Successfully'
-           ];
+    if ($query_run) {
+        $res = [
+            'status' => 200,
+            'message' => 'user Updated Successfully'
+        ];
         echo json_encode($res);
         return;
-   } else {
-     $res = [
-        'status' => 500,
-        'message' => 'user Not Updated'
-    ];
+    } else {
+        $res = [
+            'status' => 500,
+            'message' => 'user Not Updated'
+        ];
         echo json_encode($res);
         return;
+    }
 }
-}
-?>
